@@ -216,7 +216,7 @@
 }
 
 %-------------------------------------------------------------------------------
-%                Configuration for asbtract
+%                Configuration for abstract
 %-------------------------------------------------------------------------------
 
 \newcommand*{\abstracttitlestyle}[1]{{\sffamily\large \bfseries #1}}
@@ -283,7 +283,6 @@
 \fancyfoot{}
 \fancyfoot[L]{\sffamily\bfseries\footnotesize \thepage}
 \fancyhead[L]{\sffamily\footnotesize This is a non-peer reviewed manuscript submitted to {\scshape \bfseries\href{https://seismica.org/}{\color{seismicacolor1}SEISMICA}} }
-%\fancyhead[R]{\footnotesize \@author[1]}
 \renewcommand{\headrule}{}
 
 \fancypagestyle{plain}{%
@@ -321,7 +320,7 @@
 %%                Configuration for references
 %%-------------------------------------------------------------------------------
 
-\setlength{\bibsep}{3pt} %espacement entre les references biblio
+\setlength{\bibsep}{3pt}
 \renewcommand{\bibsection}{\section*{References}}
 \def\bibfont{\sffamily\small}
 \renewcommand*{\doi}[1]{\href{http://doi.org/#1}{doi:~#1}}
