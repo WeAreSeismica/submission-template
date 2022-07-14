@@ -19,7 +19,6 @@
 \title{Your article title goes here}
 
 %% Will not be printed if anonymous option ON
-%% Orcid will only be printed if manuscript is accepted
 \author[1]{A. Firstauthor
 	\orcid{1111-1111-1111-1111}
 	\thanks{Corresponding author: a.firstauthor@university.edu}
@@ -155,25 +154,24 @@
 	\end{equation}
 	
 	Please type vectors and matrices in bold: $\mathbf{X} = \left[x_1,x_2,\ldots,x_n \right]^T$.
-	
-	
+
 	\subsection{Code}
-	Code examples should be concise and descriptive. They should introduce core functionality or specific syntax and should be included using the \code{lstlisting} environment. Note that lines longer than 38 characters will be broken when using the prepress option. Extended examples or use cases should be uploaded separately. Individual words of code can be written inline, for example:
-	
-	To improve stability of the inversion, the \code{Model} object accepts the \code{strict} keyword, which disables piecewise linear approximation of the target function (Listing~\ref{code}).
-	
+
+    Code examples should be concise and descriptive. They should introduce core functionality or specific syntax and should be included using the \code{lstlisting} environment. Note that lines longer than 45 characters will be broken when using the prepress option. Extended examples or use cases should be uploaded separately. Individual words of code can be written inline, for example:
+
+        To improve stability of the inversion, the \code{Model} object accepts the \code{strict} keyword, which disables piecewise linear approximation of the target function (Listing~\ref{code}).
+
 	\begin{lstlisting}[caption=Example use of \code{Model}, label=code, language=Python]
-#2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8
+#2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4|
 import mymodule as mm
 
 model = mm.Model(strict=True)
 mdls = model.perturb()
 
 for mdl in mdls:
-var = mdl.get_variance()
+    var = mdl.get_variance()
 	\end{lstlisting}
-
-
+	
 	%% Will not be printed if anonymous option ON
 	\begin{acknowledgements}
 		Thank all relevant parties and acknowledge funding sources, if any.
@@ -182,9 +180,9 @@ var = mdl.get_variance()
 	\section*{Data and code availability}
 	Authors should direct readers to an open access repositories where data and code used in the study are made available. Zenodo, figshare, and Dryad are examples of repositories where authors can archive their data and code. Citations for datasets and codes should be included in the references, including citations for any seismic networks from which data was used. Github is not considered a persistent repository, and we encourage authors to archive a snapshot of any github-hosted code on zenodo.
 	
-	 \section*{Competing interests}
-	Declare any competing interests, financial or otherwise, pertaining to any of the authors. If there are none, state that the authors have no competing interests.
-	
+        \section*{Competing interests}
+        Declare any competing interests, financial or otherwise, pertaining to any of the authors. If there are none, state that the authors have no competing interests.
+
 	%% If the article is accepted, a separate bibfile must be uploaded along with the compiled manuscript, source file, and separate figure files.
 	%% When available, DOI numbers must be provided for all references, including datasets and codes. 
 	\bibliography{mybibfile}
