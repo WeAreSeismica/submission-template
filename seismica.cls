@@ -107,6 +107,7 @@
 		\end{dmath}}
 \fi
 \newcommand{\mathbfup}[1]{\mathord{\textnormal{\textbf{#1}}}}
+\urlstyle{sf}
 
 \RequirePackage{lineno} %% loaded here because incompatibility with breqn
 \if@review
