@@ -113,7 +113,7 @@
 \if@languages
 	\RequirePackage{polyglossia}
 	\RequirePackage{fontspec}
-	\setmainlanguages[]{english}
+	\setmainlanguage[]{english}
 	\RequirePackage[opentype,default,tabular,lining]{sourcesanspro}
 	\RequirePackage[opentype,default,tabular,lining]{sourceserifpro}
 	\RequirePackage[opentype,default,tabular,lining]{sourcecodepro}
