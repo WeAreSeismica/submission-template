@@ -122,7 +122,7 @@ hyperfootnotes=false]{hyperref}
 \RequirePackage[autostyle=false, style=english]{csquotes}
 \RequirePackage[opentype,default,tabular,lining]{sourcesanspro}
 \RequirePackage[opentype,default,tabular,lining]{sourceserifpro}
-\RequirePackage[opentype,default,tabular,lining]{sourcecodepro}
+\RequirePackage[opentype,default,lining]{sourcecodepro}
 \else
 \RequirePackage[regular]{sourcesanspro}
 \RequirePackage[regular]{sourcecodepro}
