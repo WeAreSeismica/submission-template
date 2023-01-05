@@ -1,4 +1,8 @@
 % Documentclass seismica.cls
+% for Seismica, a community-driven, Diamond Open Access journal publishing peer-reviewed research in seismology and earthquake science.
+% Current version with inputs from:
+% Théa Ragon, Hannah Mark, Wasja Bloch, Thomas Lecocq
+
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{seismica}[2022 LaTeX2e document class]
@@ -48,11 +52,11 @@
 \fi
 
 \RequirePackage[headsep=0.7cm,
-				top=2cm,
-				bottom=1.5cm,
-				left=1.5cm,
-				right=1.5cm,
-				footskip=0.7cm]{geometry}
+top=2cm,
+bottom=1.5cm,
+left=1.5cm,
+right=1.5cm,
+footskip=0.7cm]{geometry}
 \setlength{\columnsep}{0.8cm}
 \RequirePackage[table]{xcolor}
 \definecolor{linkblue}{RGB}{38,81,143}
@@ -61,11 +65,11 @@
 \definecolor{seismicacolor3}{RGB}{222,60,75}
 \definecolor{codebackcolor}{RGB}{243,243,243}
 \RequirePackage[unicode,
-				bookmarks=true,
-				linkcolor=linkblue,
-				citecolor=linkblue,
-				hidelinks,
-				hyperfootnotes=false]{hyperref}
+bookmarks=true,
+linkcolor=linkblue,
+citecolor=linkblue,
+hidelinks,
+hyperfootnotes=false]{hyperref}
 \hypersetup{colorlinks,linkcolor=linkblue}
 \hypersetup{colorlinks,citecolor=linkblue}
 \hypersetup{colorlinks,urlcolor=gray}
@@ -78,51 +82,61 @@
 \RequirePackage{bookmark}
 \RequirePackage{caption} 
 \RequirePackage[round]{natbib}
-\IfFileExists{abbrvnat_seismica.bst}{\bibliographystyle{abbrvnat_seismica}}{\bibliographystyle{abbrvnat}}
+\IfFileExists{abbrvnat_seismica_upcasetitle.bst}{\bibliographystyle{abbrvnat_seismica_upcasetitle}}{\bibliographystyle{abbrvnat}}
 \RequirePackage{doi}
 %\RequirePackage{orcidlink}
 \RequirePackage[noblocks]{authblk}
 \setcounter{Maxaffil}{0}
-\RequirePackage{adjustbox}
 \RequirePackage{datatool}
 \RequirePackage{etoolbox}
 \RequirePackage{comment}
 \RequirePackage{physics}
 \RequirePackage{listings}
+\RequirePackage{changepage}
+\RequirePackage{setspace}
 
 % fonts and math
 \RequirePackage{amsmath}
 \if@breakmath
-	\RequirePackage{breqn}
-	\BeforeBeginEnvironment{dmath}{\begin{nolinenumbers}}
+\RequirePackage{breqn}
+\BeforeBeginEnvironment{dmath}{\begin{nolinenumbers}}
 	\AfterEndEnvironment{dmath}{\end{nolinenumbers}}
-	\BeforeBeginEnvironment{dmath*}{\begin{nolinenumbers}}
+\BeforeBeginEnvironment{dmath*}{\begin{nolinenumbers}}
 	\AfterEndEnvironment{dmath*}{\end{nolinenumbers}}
-	\renewenvironment{equation}{%
-		\begin{dmath}}{%
-		\end{dmath}}
+\renewenvironment{equation}{%
+	\begin{dmath}}{%
+\end{dmath}}
 \fi
 \newcommand{\mathbfup}[1]{\mathord{\textnormal{\textbf{#1}}}}
 
-\RequirePackage{lineno} %% loaded here because incompatibility with breqn
+\RequirePackage[mathlines]{lineno} %% loaded here because incompatibility with breqn
 \if@review
 \linenumbers
+\doublespacing
 \fi
-
 
 \if@languages
-	\RequirePackage{polyglossia}
-	\RequirePackage{fontspec}
-	\setmainlanguage[]{english}
-	\RequirePackage[opentype,default,tabular,lining]{sourcesanspro}
-	\RequirePackage[opentype,default,tabular,lining]{sourceserifpro}
-	\RequirePackage[opentype,default,lining]{sourcecodepro}
+\RequirePackage{polyglossia}
+\RequirePackage{fontspec}
+\setmainlanguage[]{english}
+\RequirePackage[autostyle=false, style=english]{csquotes}
+\RequirePackage[opentype,default,tabular,lining]{sourcesanspro}
+\RequirePackage[opentype,default,tabular,lining]{sourceserifpro}
+\RequirePackage[opentype,default,lining]{sourcecodepro}
 \else
-	\RequirePackage[regular]{sourcesanspro}
-	\RequirePackage[regular]{sourcecodepro}
-	\RequirePackage[default,regular]{sourceserifpro}
-	\RequirePackage[T1]{fontenc}
+\RequirePackage[regular]{sourcesanspro}
+\RequirePackage[regular]{sourcecodepro}
+\RequirePackage[default,regular]{sourceserifpro}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[autostyle=false, style=english]{csquotes}
 \fi
+
+\newcommand{\sff}{\sourcesanspro}
+\newcommand{\rmf}{\sourceserifpro}
+\newcommand{\sflight}{\sourcesansprolight}
+\newcommand{\rmlight}{\sourceserifprolight}
+\urlstyle{sf}
+
 
 %-------------------------------------------------------------------------------
 %                Configuration for authors
@@ -178,7 +192,7 @@
 }
 
 \if@anonymous
-	\renewcommand{\@author}{}
+\renewcommand{\@author}{}
 \fi
 
 % Redefine thanks symbol for compatibility with fonts
@@ -211,19 +225,19 @@
 	\begin{flushleft}
 	}
 	
-\if@anonymous
-		\postauthor{%
-		\end{flushleft}%
-		\vskip -.5em
-		\par
-		}
-\else
+	\if@anonymous
 	\postauthor{%
 	\end{flushleft}%
 	\vskip -.5em
-	\printcreditifnotempty
 	\par
-	}
+}
+\else
+\postauthor{%
+\end{flushleft}%
+\vskip -.5em
+\printcreditifnotempty
+\par
+}
 \fi
 \predate{}
 \postdate{}
@@ -236,18 +250,22 @@
 
 
 \renewcommand\maketitlehooka{%
-	\vspace{-1.5cm}
-	\href{https://seismica.org/}{\includegraphics[width=\textwidth]{\banner}}
-	
-	{\vspace*{-1.3cm} \hspace{0.1cm} 
-		\href{https://seismica.org/}{\color{black} \sffamily\small Non-peer reviewed manuscript submitted to} }
-	
-	\vspace*{1.7cm}
+\vspace{-1.5cm}
+\href{https://seismica.org/}{\includegraphics[width=\textwidth]{\banner}}
+
+\if@review
+{\vspace*{-1.6cm} \hspace{0.1cm} 
+	\href{https://seismica.org/}{\color{black} \sffamily\small Non-peer reviewed manuscript submitted to} }
+\else
+{\vspace*{-1.3cm} \hspace{0.1cm} 
+	\href{https://seismica.org/}{\color{black} \sffamily\small Non-peer reviewed manuscript submitted to} }
+\fi
+\vspace*{1.7cm}
 }
 
 \renewcommand\maketitlehookd{%
-	\pagestyle{fancy}
-	\thispagestyle{plain}
+\pagestyle{fancy}
+\thispagestyle{plain}
 }
 
 %-------------------------------------------------------------------------------
@@ -261,32 +279,56 @@
 
 \newenvironment{summary}[1]
 {
-	%	\pdfbookmark{#1}{#1}
-	\vspace{0.3cm}
-	\par
-	\noindent \abstracttitlestyle{#1} \hspace{0.2cm}\sffamily
-}%
-{
-}
+\par
+\noindent \abstracttitlestyle{#1} \hspace{0.2cm}\sffamily
+}{
+\vspace{0.3cm}}%
+
+\newenvironment{abswidth}{\begin{adjustwidth}{}{0.18\paperwidth}}{\end{adjustwidth}}
+
+%% abstract.sty specs, needed for saythanks
+\setlength{\absleftindent}{0pt}
+\setlength{\absrightindent}{0pt}
+\renewcommand{\abstractname}{}   
+\renewcommand{\absnamepos}{empty} 
+\addto\captionsenglish{\renewcommand{\abstractname}{}} % necessary to remove abstract title... don't know why
 
 \if@onecolumn
 \newcommand*{\makeseistitle}[1]{%
-	\maketitle
-	\begin{adjustbox}{minipage=0.68\paperwidth}
-		#1
-	\end{adjustbox}
-	\vspace{1cm}
+\maketitle
+\begin{abswidth}
+	#1
+\end{abswidth}
+\vspace{0.7cm}
+\thanks
+}
+\newcommand*{\addsummaries}[1]{%
+\begin{abswidth}
+	#1
+\end{abswidth}
+\vspace{0.7cm}
 }
 \else
 \newcommand*{\makeseistitle}[1]{%
-	\twocolumn[%
-	\maketitle
-	\begin{adjustbox}{minipage=0.68\paperwidth}
+\twocolumn[
+\maketitle
+\begin{abswidth}
+	\begin{onecolabstract}
+		%		\zsavepos{loc:beg_abstract}		
 		#1
-	\end{adjustbox}
-	\vspace{1cm}
-	]
-	\saythanks
+	\end{onecolabstract}
+\end{abswidth}
+\vspace*{0.7cm}
+]
+\saythanks
+}
+\newcommand*{\addsummaries}[1]{%
+\twocolumn[
+\begin{abswidth}
+	#1
+\end{abswidth}
+]
+\vspace{0.7cm}
 }
 \fi
 
@@ -306,7 +348,7 @@
 {}
 
 \if@anonymous
-	\excludecomment{acknowledgements}
+\excludecomment{acknowledgements}
 \fi
 
 %-------------------------------------------------------------------------------
@@ -326,8 +368,8 @@
 \renewcommand{\headrule}{}
 
 \fancypagestyle{plain}{%
-	\fancyhead{}
-	\renewcommand{\headrule}{}
+\fancyhead{}
+\renewcommand{\headrule}{}
 }
 
 %
@@ -336,10 +378,10 @@
 %%-------------------------------------------------------------------------------
 
 \captionsetup{font=sf, 
-	labelfont=bf, 
-	labelsep=quad, 
-	justification=justified, 
-	singlelinecheck=false, oneside}
+labelfont=bf, 
+labelsep=quad, 
+justification=justified, 
+singlelinecheck=false, oneside}
 
 
 % equations
@@ -350,7 +392,7 @@
 \renewcommand{\eqref}[1]{\textup{\eqreftagform@{\ref{#1}}}}
 \let\eqreftagform@\tagform@
 \def\tagform@#1{%
-	\maketag@@@{\color{gray}\sffamily(\ignorespaces#1\unskip\@@italiccorr)}%
+\maketag@@@{\color{gray}\sffamily(\ignorespaces#1\unskip\@@italiccorr)}%
 }
 \fi
 
@@ -374,18 +416,57 @@
 \setlength{\fboxsep}{1pt}
 
 \lstset{
-	tabsize=4,
-	captionpos=t,
-	breaklines=true,
-	showstringspaces=false,
-	basicstyle=\fontsize{9}{10}\ttfamily,
-	keywordstyle=\color{seismicacolor2},
-	commentstyle=\color{gray},
-	stringstyle=\color{seismicacolor1},
-	emphstyle=\color{seismicacolor3},
-	%	frameshape={RYR}{Y}{Y}{RYR},
-	backgroundcolor=\color{codebackcolor},   
-	rulecolor=\color{codebackcolor}
+tabsize=4,
+captionpos=t,
+breaklines=true,
+showstringspaces=false,
+basicstyle=\fontsize{9}{10}\ttfamily,
+keywordstyle=\color{seismicacolor2},
+commentstyle=\color{gray},
+stringstyle=\color{seismicacolor1},
+emphstyle=\color{seismicacolor3},
+%	frameshape={RYR}{Y}{Y}{RYR},
+backgroundcolor=\color{codebackcolor},   
+rulecolor=\color{codebackcolor}
 }
+
+
+%%-------------------------------------------------------------------------------
+%%                Configuration for math line numbers
+%%-------------------------------------------------------------------------------
+%% from  https://tex.stackexchange.com/questions/461186/how-to-use-lineno-with-amsmath-align
+
+\if@review
+%% Patch 'normal' math environments:
+\newcommand*\linenomathpatch[1]{%
+\cspreto{#1}{\linenomath}%
+\cspreto{#1*}{\linenomath}%
+\csappto{end#1}{\endlinenomath}%
+\csappto{end#1*}{\endlinenomath}%
+}
+%% Patch AMS math environments:
+\newcommand*\linenomathpatchAMS[1]{%
+\cspreto{#1}{\linenomathAMS}%
+\cspreto{#1*}{\linenomathAMS}%
+\csappto{end#1}{\endlinenomath}%
+\csappto{end#1*}{\endlinenomath}%
+}
+
+%% Definition of \linenomathAMS depends on whether the mathlines option is provided
+\expandafter\ifx\linenomath\linenomathWithnumbers
+\let\linenomathAMS\linenomathWithnumbers
+%% The following line gets rid of an extra line numbers at the bottom:
+\patchcmd\linenomathAMS{\advance\postdisplaypenalty\linenopenalty}{}{}{}
+\else
+\let\linenomathAMS\linenomathNonumbers
+\fi
+
+\linenomathpatch{equation}
+\linenomathpatchAMS{gather}
+\linenomathpatchAMS{multline}
+\linenomathpatchAMS{align}
+\linenomathpatchAMS{alignat}
+\linenomathpatchAMS{flalign}
+\fi
 
 % end of seismica.cls 
