@@ -73,6 +73,8 @@ hyperfootnotes=false]{hyperref}
 \hypersetup{colorlinks,linkcolor=linkblue}
 \hypersetup{colorlinks,citecolor=linkblue}
 \hypersetup{colorlinks,urlcolor=gray}
+\RequirePackage{url}
+\def\UrlBreaks{\do\/\do-\do_}
 
 \RequirePackage{graphicx}
 \RequirePackage{titlesec}
@@ -127,7 +129,7 @@ hyperfootnotes=false]{hyperref}
 \RequirePackage[autostyle=false, style=english]{csquotes}
 \RequirePackage[opentype,default,tabular,lining]{sourcesanspro}
 \RequirePackage[opentype,default,tabular,lining]{sourceserifpro}
-\RequirePackage[opentype,default,lining]{sourcecodepro}
+\RequirePackage[opentype,lining]{sourcecodepro}
 \else
 \RequirePackage[regular]{sourcesanspro}
 \RequirePackage[regular]{sourcecodepro}
