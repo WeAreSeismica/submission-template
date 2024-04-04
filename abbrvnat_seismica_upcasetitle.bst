@@ -1,4 +1,4 @@
-%% File: `abbrvnat.bst' last updated - 2023-07-15
+%% File: `abbrvnat.bst'
 %% A modification of `abbrv.bst' for use with natbib package
 %%
 %% Copyright 1993-2007 Patrick W Daly
@@ -925,7 +925,6 @@ FUNCTION {misc}
   format.date output
   format.issn output
   format.url output
-  format.doi output
   new.block
   note output
   fin.entry
