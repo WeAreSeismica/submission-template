@@ -32,6 +32,10 @@
 \@preprintfalse
 \DeclareOption{preprint}{\@preprinttrue}
 
+\newif\if@report
+\@reportfalse
+\DeclareOption{report}{\@reporttrue}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
@@ -130,6 +134,11 @@ hyperfootnotes=false]{hyperref}
 \RequirePackage[opentype,default,tabular,lining]{sourcesanspro}
 \RequirePackage[opentype,default,tabular,lining]{sourceserifpro}
 \RequirePackage[opentype,lining]{sourcecodepro}
+%% extra options for Arabic (not supported by polyglossia)
+\newfontfamily\arabicfont[Script=Arabic]{Arial} %{Noto Naskh Arabic}
+\newcommand{\textarabic}[1]{\bgroup\textdir TRT\arabicfont #1\egroup} % Arabic inside LTR
+\newcommand{\n}[1]{\bgroup\textdir TLT #1\egroup} % for digits inside Arabic text
+\newenvironment{Arabic}{\textdir TRT\pardir TRT\arabicfont}{} % Arabic paragraph
 \else
 \RequirePackage[regular]{sourcesanspro}
 \RequirePackage[regular]{sourcecodepro}
@@ -262,10 +271,10 @@ hyperfootnotes=false]{hyperref}
 
 \if@review
 {\vspace*{-1.6cm} \hspace{0.1cm} 
-	\href{https://seismica.org/}{\color{black} \sffamily\small Non-peer reviewed manuscript submitted to} }
+	\href{https://seismica.org/}{\color{black} \sffamily\small Non-peer reviewed {\bfseries\manustype} submitted to} }
 \else
 {\vspace*{-1.3cm} \hspace{0.1cm} 
-	\href{https://seismica.org/}{\color{black} \sffamily\small Non-peer reviewed manuscript submitted to} }
+	\href{https://seismica.org/}{\color{black} \sffamily\small Non-peer reviewed {\bfseries\manustype} submitted to} }
 \fi
 \vspace*{1.7cm}
 }
@@ -361,6 +370,23 @@ hyperfootnotes=false]{hyperref}
 %-------------------------------------------------------------------------------
 %                Configuration for header and footer
 %-------------------------------------------------------------------------------
+%% Article type
+\def\reporttype#1{\def\@reporttype{#1}}
+%\reporttype{}
+
+\newcommand{\reportreplace}[2]{%
+	\ifdefined #1
+	#1
+	\else
+	#2
+	\fi
+}
+
+\if@report
+\newcommand{\manustype}{\reportreplace{\@reporttype}{Report}}
+\else
+\newcommand{\manustype}{\reportreplace{\@reporttype}{Research Article}}
+\fi
 
 \def\shorttitle@internal{}
 \newcommand{\shorttitle}[1]{\gdef\shorttitle@internal{#1}}
@@ -370,7 +396,7 @@ hyperfootnotes=false]{hyperref}
 \fancyhf{}
 \fancyfoot{}
 \fancyfoot[L]{\sffamily\bfseries\footnotesize \thepage}
-\fancyhead[L]{\sffamily\footnotesize This is a non-peer reviewed manuscript submitted to {\scshape \bfseries\href{https://seismica.org/}{\color{seismicacolor1}SEISMICA}} }
+\fancyhead[L]{\sffamily\footnotesize This is a non-peer reviewed {\bfseries\manustype} submitted to {\scshape \bfseries\href{https://seismica.org/}{\color{seismicacolor1}SEISMICA}} }
 \fancyhead[R]{\sffamily\footnotesize \color{seismicacolor1}\insertshorttitle}
 \renewcommand{\headrule}{}
 
